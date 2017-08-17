@@ -9,7 +9,7 @@ module.exports = {
     main: './src/main.js'
   },
   output: {
-    filename: '[name].[hash].js',
+    filename: '[name].[chunkhash].js',
     path: path.resolve(__dirname, 'dist')
   },
   resolve: {

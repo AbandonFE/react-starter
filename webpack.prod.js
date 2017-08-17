@@ -14,7 +14,7 @@ module.exports = Merge(baseConfig, {
       }
     }),
     new HtmlWebpackPlugin({
-      title: 'react',
+      title: 'react11',
       template: './index.html',
       filename: 'index.html',
       inject: true,
