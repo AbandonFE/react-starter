@@ -1,7 +1,7 @@
 const path = require('path');
 
 function resolve (dir) {
-  return path.join(__dirname, dir)
+  return path.join(__dirname, '..', dir)
 }
 
 module.exports = {
@@ -10,7 +10,7 @@ module.exports = {
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'dist')
+    path: resolve(__dirname, 'dist')
   },
   resolve: {
     extensions: ['.js', '.json'],

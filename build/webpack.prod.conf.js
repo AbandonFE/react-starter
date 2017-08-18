@@ -1,16 +1,16 @@
-const Merge = require('webpack-merge');
+const merge = require('webpack-merge');
 const webpack = require('webpack');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const baseConfig = require('./webpack.base.js');
+const cleanWebpackPlugin = require('clean-webpack-plugin');
+const htmlWebpackPlugin = require('html-webpack-plugin');
+const extractTextPlugin = require('extract-text-webpack-plugin');
+const baseConfig = require('./webpack.base.conf.js');
 
-module.exports = Merge(baseConfig, {
+module.exports = merge(baseConfig, {
   module: {
     rules:[
       {
         test: /\.css$/,
-        use: ExtractTextPlugin.extract({
+        use: extractTextPlugin.extract({
           use: ['css-loader'],
           fallback: 'style-loader',
         })
@@ -21,14 +21,14 @@ module.exports = Merge(baseConfig, {
     filename: '[name].[chunkhash].js'
   },
   plugins: [
-    new CleanWebpackPlugin(['dist']),
+    // new cleanWebpackPlugin(['dist']),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('production')
       }
     }),
-    new HtmlWebpackPlugin({
-      title: 'react11',
+    new htmlWebpackPlugin({
+      title: 'react',
       template: './index.html',
       filename: 'index.html',
       inject: true,
@@ -60,7 +60,7 @@ module.exports = Merge(baseConfig, {
     new webpack.optimize.CommonsChunkPlugin({
       name: 'manifest', //But since there are no more common modules between them we end up with just the runtime code included in the manifest file
     }),
-    new ExtractTextPlugin({
+    new extractTextPlugin({
       filename: '[name].[chunkhash:8].css'
     })
   ]
