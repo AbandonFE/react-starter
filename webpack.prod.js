@@ -33,10 +33,20 @@ module.exports = Merge(baseConfig, {
       sourceMap: true
     }),
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor'
+      name: 'vendor',
+      minChunks: (mod, count) => {
+        // this is used to pick out vendors
+        let context = mod.context
+        if(!context) return false
+        if(context.indexOf('node_modules') === -1 && context.indexOf('bower_components') === -1) return false
+        return true
+      },
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'manifest', //But since there are no more common modules between them we end up with just the runtime code included in the manifest file
     }),
     new ExtractTextPlugin({
-      filename: 'bundle.css'
+      filename: '[name].[chunkhash:8].css'
     })
   ]
 })
