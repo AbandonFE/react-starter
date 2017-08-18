@@ -8,7 +8,7 @@ const app = express();
 
 const compiler = webpack(webpackConfig);
 const devMiddleWare = webpackDevMiddleware(compiler, {
-  publicpath: webpackConfig.output.publicPath,
+  publicPath: webpackConfig.output.publicPath,
   stats: {
     colors: true
   }

@@ -6,7 +6,7 @@ function resolve (dir) {
 
 module.exports = {
   entry: {
-    main: './src/main.js'
+    main: ['./src/main.js', 'webpack-hot-middleware/client?reload=true']
   },
   output: {
     filename: '[name].js',

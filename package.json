@@ -6,8 +6,7 @@
   "scripts": {
     "start": "node build/dev-server.js",
     "dev": "node build/dev-server.js",
-    "build": "node build/build.js",
-    "test": "webpack --config webpack.prod.js"
+    "build": "node build/build.js"
   },
   "author": "liu",
   "license": "ISC",

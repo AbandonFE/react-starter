@@ -17,6 +17,7 @@ module.exports = merge(baseConfig, {
   devtool: '#cheap-module-eval-source-map',
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new htmlWebpackPlugin({
       title: 'react',
       template: './index.html',

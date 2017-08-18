@@ -6,7 +6,7 @@ function component() {
   element.classList.add('hello');
   var btn = document.createElement('button');
 
-  element.innerHTML = 'hello world7';
+  element.innerHTML = 'hello world1d3';
 
   btn.innerHTML = 'Click me and check the console!';
   btn.onclick = printMe;
