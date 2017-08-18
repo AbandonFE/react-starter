@@ -1,5 +1,4 @@
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 function resolve (dir) {
   return path.join(__dirname, dir)
@@ -10,7 +9,7 @@ module.exports = {
     main: './src/main.js'
   },
   output: {
-    filename: '[name].[chunkhash].js',
+    filename: '[name].js',
     path: path.resolve(__dirname, 'dist')
   },
   resolve: {
@@ -23,13 +22,6 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          use: ['css-loader'],
-          fallback: 'style-loader',
-        }),
-      },
       {
         test: /\.(png|jpe?g|gif|webp|svg)(\?.*)?$/,
         use: ['file-loader']

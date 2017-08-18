@@ -6,6 +6,20 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const baseConfig = require('./webpack.base.js');
 
 module.exports = Merge(baseConfig, {
+  module: {
+    rules:[
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          use: ['css-loader'],
+          fallback: 'style-loader',
+        })
+      }
+    ]
+  },
+  output: {
+    filename: '[name].[chunkhash].js'
+  },
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new webpack.DefinePlugin({
@@ -27,6 +41,7 @@ module.exports = Merge(baseConfig, {
     }),
     new webpack.HashedModuleIdsPlugin(),
     new webpack.optimize.UglifyJsPlugin({
+      minimize: true,
       compress: {
         warnings: false
       },
