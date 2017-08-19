@@ -5,6 +5,10 @@ const htmlWebpackPlugin = require('html-webpack-plugin');
 var friendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const baseConfig = require('./webpack.base.conf.js');
 
+Object.keys(baseConfig.entry).forEach(name => {
+  baseConfig.entry[name] = baseConfig.entry[name].concat('webpack-hot-middleware/client?reload=true');
+});
+
 module.exports = merge(baseConfig, {
   module: {
     rules: [
