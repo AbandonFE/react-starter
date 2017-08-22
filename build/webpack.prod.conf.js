@@ -1,8 +1,10 @@
+const path = require('path');
 const merge = require('webpack-merge');
 const webpack = require('webpack');
 const cleanWebpackPlugin = require('clean-webpack-plugin');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const extractTextPlugin = require('extract-text-webpack-plugin');
+const config = require('../config');
 const baseConfig = require('./webpack.base.conf.js');
 
 module.exports = merge(baseConfig, {
@@ -18,10 +20,13 @@ module.exports = merge(baseConfig, {
     ]
   },
   output: {
-    filename: '[name].[chunkhash].js'
+    path: config.build.distRoot,
+    filename: 'js/[name].[chunkhash].js'
   },
   plugins: [
-    new cleanWebpackPlugin(['dist']),
+    new cleanWebpackPlugin(['dist'], {
+      root: path.resolve(__dirname, '../')
+    }),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('production')

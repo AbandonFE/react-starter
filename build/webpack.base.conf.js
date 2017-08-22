@@ -1,4 +1,5 @@
 const path = require('path');
+const config = require('../config');
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -10,11 +11,11 @@ module.exports = {
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, '../dist')
+    path: config.build.distRoot,
   },
   resolve: {
     extensions: ['.js', '.json'],
-    modules: [resolve('src'), 'node_modules'],
+    modules: [resolve('/'), 'node_modules'],
     alias: {
       'src': resolve('src'),
       'assets': resolve('src/assets')
