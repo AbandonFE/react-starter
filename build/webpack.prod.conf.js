@@ -46,6 +46,8 @@ module.exports = merge(baseConfig, {
       },
       chunksSortMode: 'dependency'
     }),
+
+    // 防止moduleId变化造成verdor 的hash变化
     new webpack.HashedModuleIdsPlugin(),
 
     // 压缩js
@@ -57,7 +59,7 @@ module.exports = merge(baseConfig, {
       sourceMap: true
     }),
 
-    // 提取公共模块，公共模块如果内容不变，则不需要重新编译打包
+    // 提取公共模块
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks: (mod, count) => {
@@ -69,7 +71,7 @@ module.exports = merge(baseConfig, {
       },
     }),
 
-    // 为防止公共模块每次都编译打包需要设置manifest文件
+    // 为防止因业务代码改变而造成公共模块每次都编译打包， 因此需要设置manifest文件
     new webpack.optimize.CommonsChunkPlugin({
       name: 'manifest', //But since there are no more common modules between them we end up with just the runtime code included in the manifest file
     }),
