@@ -2,7 +2,7 @@ const path = require('path');
 module.exports = {
   dev: {
     env: require('./dev.env'),
-    port: 9000,
+    port: 9000, // dev端口
     publicPath: './',
     staticPath: 'static'
   },

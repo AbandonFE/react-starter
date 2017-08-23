@@ -24,9 +24,11 @@ module.exports = merge(baseConfig, {
     filename: 'js/[name].[chunkhash].js'
   },
   plugins: [
+    // 每次构建之前清除dist文件夹
     new cleanWebpackPlugin(['dist'], {
       root: path.resolve(__dirname, '../')
     }),
+    // 设置环境变量
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('production')
@@ -38,20 +40,24 @@ module.exports = merge(baseConfig, {
       filename: 'index.html',
       inject: true,
       minify: {
-        removeComments: true,
-        collapseWhitespace: true,
+        removeComments: true,   // 移除注释
+        collapseWhitespace: true,   // 清除空行
         removeAttributeQuotes: true
       },
       chunksSortMode: 'dependency'
     }),
     new webpack.HashedModuleIdsPlugin(),
+
+    // 压缩js
     new webpack.optimize.UglifyJsPlugin({
       minimize: true,
       compress: {
-        warnings: false
+        warnings: false  // 是否显示警告，设置为true会影响编译速度
       },
       sourceMap: true
     }),
+
+    // 提取公共模块，公共模块如果内容不变，则不需要重新编译打包
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks: (mod, count) => {
@@ -62,9 +68,13 @@ module.exports = merge(baseConfig, {
         return true
       },
     }),
+
+    // 为防止公共模块每次都编译打包需要设置manifest文件
     new webpack.optimize.CommonsChunkPlugin({
       name: 'manifest', //But since there are no more common modules between them we end up with just the runtime code included in the manifest file
     }),
+
+    // 抽取css
     new extractTextPlugin({
       filename: '[name].[chunkhash:8].css'
     })

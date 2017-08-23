@@ -6,6 +6,7 @@ var friendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const baseConfig = require('./webpack.base.conf.js');
 
 Object.keys(baseConfig.entry).forEach(name => {
+  // 为每个入口配置加入webpack-hot-middleware/client?reload=true，模块热加载配置
   baseConfig.entry[name] = baseConfig.entry[name].concat('webpack-hot-middleware/client?reload=true');
 });
 
@@ -20,6 +21,7 @@ module.exports = merge(baseConfig, {
   },
   devtool: '#cheap-module-eval-source-map',
   plugins: [
+    // 模块热加载
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new htmlWebpackPlugin({
@@ -29,6 +31,7 @@ module.exports = merge(baseConfig, {
       inject: true,
       showErrors: true
     }),
+    // 出错不会中断执行
     new friendlyErrorsPlugin()
   ]
 })
