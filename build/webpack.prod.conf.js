@@ -48,7 +48,7 @@ module.exports = merge(baseConfig, {
     }),
 
     // 新增某个模块，由于插入顺序会导致插入位置以后的模块id发生变化，因此会造成verdor的chunkhash发生变化
-    // 防止moduleId变化造成verdor 的hash变化，此插件基于内容或者文件名来生成模块id，与顺序无关 
+    // 防止moduleId变化造成verdor 的hash变化，此插件基于内容或者文件名来生成模块id，与顺序无关
 
     new webpack.HashedModuleIdsPlugin(),
 
@@ -80,7 +80,7 @@ module.exports = merge(baseConfig, {
 
     // 抽取css
     new extractTextPlugin({
-      filename: '[name].[chunkhash:8].css'
+      filename: 'css/[name].[chunkhash:8].css'
     })
   ]
 })

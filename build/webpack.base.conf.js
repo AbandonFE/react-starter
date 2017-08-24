@@ -14,7 +14,7 @@ module.exports = {
     path: config.build.distRoot,
   },
   resolve: {
-    extensions: ['.js', '.json'],
+    extensions: ['.js', '.jsx', '.json'],
     modules: [resolve('/'), 'node_modules'],
     alias: {
       'src': resolve('src'),
@@ -23,6 +23,11 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.jsx?$/,
+        use: ['babel-loader'],
+        exclude: /node_modules/
+      },
       {
         test: /\.(png|jpe?g|gif|webp|svg)(\?.*)?$/,
         use: ['file-loader']
