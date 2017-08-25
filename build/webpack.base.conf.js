@@ -30,7 +30,13 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif|webp|svg)(\?.*)?$/,
-        use: ['file-loader']
+        use: {
+          loader: 'file-loader',
+          options: {
+            limit: 10000,
+            name: util.assetsPath('img/[name].[hash:7].[ext]')
+          }
+        }
       },
       {
         test: /\.(woff|woff2|eot|ttf|ttf)$/,
@@ -38,7 +44,7 @@ module.exports = {
           loader: 'file-loader',
           options: {
             limit: 10000,
-            name: utils.assetsPath('img/[name].[hash:7].[ext]')
+            name: util.assetsPath('fonts/[name].[hash:7].[ext]')
           }
         }
       }

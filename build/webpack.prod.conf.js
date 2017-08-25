@@ -6,6 +6,7 @@ const htmlWebpackPlugin = require('html-webpack-plugin');
 const extractTextPlugin = require('extract-text-webpack-plugin');
 const config = require('../config');
 const baseConfig = require('./webpack.base.conf.js');
+const util = require('./util');
 
 module.exports = merge(baseConfig, {
   module: {
@@ -21,7 +22,7 @@ module.exports = merge(baseConfig, {
   },
   output: {
     path: config.build.distRoot,
-    filename: 'js/[name].[chunkhash].js'
+    filename: util.assetsPath('js/[name].[chunkhash].js'),
   },
   plugins: [
     // 设置环境变量
@@ -78,7 +79,7 @@ module.exports = merge(baseConfig, {
 
     // 抽取css
     new extractTextPlugin({
-      filename: 'css/[name].[chunkhash:8].css'
+      filename: util.assetsPath('css/[name].[chunkhash:8].css')
     })
   ]
 })
