@@ -1,6 +1,6 @@
 const path = require('path');
 const config = require('../config');
-
+const util = require('./util')
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
@@ -37,7 +37,8 @@ module.exports = {
         use: {
           loader: 'file-loader',
           options: {
-            limit: 100000
+            limit: 10000,
+            name: utils.assetsPath('img/[name].[hash:7].[ext]')
           }
         }
       }

@@ -2,8 +2,9 @@ const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const htmlWebpackPlugin = require('html-webpack-plugin');
-var friendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
+const friendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const baseConfig = require('./webpack.base.conf.js');
+const config = require('../config');
 
 Object.keys(baseConfig.entry).forEach(name => {
   // 为每个入口配置加入webpack-hot-middleware/client?reload=true，模块热加载配置
@@ -21,6 +22,10 @@ module.exports = merge(baseConfig, {
   },
   devtool: '#cheap-module-eval-source-map',
   plugins: [
+    // 设置环境变量
+    new webpack.DefinePlugin({
+      'process.env': config.dev.env
+    }),
     // 模块热加载
     new webpack.HotModuleReplacementPlugin(),
     // 出错后不中断，编辑结束后报错

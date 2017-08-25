@@ -24,15 +24,13 @@ module.exports = merge(baseConfig, {
     filename: 'js/[name].[chunkhash].js'
   },
   plugins: [
+    // 设置环境变量
+    new webpack.DefinePlugin({
+      'process.env': config.build.env
+    }),
     // 每次构建之前清除dist文件夹
     new cleanWebpackPlugin(['dist'], {
       root: path.resolve(__dirname, '../')
-    }),
-    // 设置环境变量
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify('production')
-      }
     }),
     new htmlWebpackPlugin({
       title: 'react',
