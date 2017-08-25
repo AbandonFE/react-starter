@@ -4,7 +4,8 @@ module.exports = {
     env: require('./dev.env'),
     port: 9000, // dev端口
     publicPath: './',
-    staticPath: 'static'
+    staticPath: 'static',
+    proxyTable: {}
   },
   build: {
     env: require('./prod.env'),

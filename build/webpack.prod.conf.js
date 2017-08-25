@@ -42,7 +42,7 @@ module.exports = merge(baseConfig, {
       minify: {
         removeComments: true,   // 移除注释
         collapseWhitespace: true,   // 清除空行
-        removeAttributeQuotes: true
+        removeAttributeQuotes: true  // 删除html元素中属性的引号
       },
       chunksSortMode: 'dependency'
     }),
