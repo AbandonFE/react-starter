@@ -23,7 +23,9 @@ module.exports = merge(baseConfig, {
   plugins: [
     // 模块热加载
     new webpack.HotModuleReplacementPlugin(),
+    // 出错后不中断，编辑结束后报错
     new webpack.NoEmitOnErrorsPlugin(),
+    // html 模板
     new htmlWebpackPlugin({
       title: 'react',
       template: './index.html',
@@ -31,7 +33,7 @@ module.exports = merge(baseConfig, {
       inject: true,
       showErrors: true
     }),
-    // 出错不会中断执行
+    // 友好的错误提示
     new friendlyErrorsPlugin()
   ]
 })
