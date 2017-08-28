@@ -1,20 +1,26 @@
 module.exports = {
-  root: true,
+  root: true,  // 使用项目根目录下的配置，不会再文件父目录中递归向上查找eslint配置文件
   parser: "babel-eslint",
   parserOptions: {
-    ecmaVersion: 6, // 指定es版本
     sourceType: "module",  // 表示ecmascript模块
     ecmaFeatures: {
-      "jsx": true // 启用 JSX
+      jsx: true // 启用 JSX
     }
   },
-  // https://github.com/feross/standard/blob/master/RULES.md#javascript-standard-style
-  "extends": "standard",
+  env: {
+    browser: true,
+    node: true,
+    es6: true,  // 该选项会自动设置 ecmaVersion 解析器选项为 6
+    commonjs: true
+  },
+  extends: "standard", // 使用标准规则校验
   plugins: [
-    "react", "html"
+    "react",
+    // "html"   // 校验html文件中script标签中的js代码
   ],
   rules: {
-    "linebreak-style": 0,
+    "react/jsx-uses-vars": [2], //解决jsx校验中组件import未使用的问题
+      "linebreak-style": 0,
     // allow paren-less arrow functions
     "arrow-parens": 0,
     // allow async-await
