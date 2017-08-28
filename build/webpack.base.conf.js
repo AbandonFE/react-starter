@@ -25,6 +25,18 @@ module.exports = {
     rules: [
       {
         test: /\.jsx?$/,
+        enforce: 'pre',
+        use: {
+          loader: 'eslint-loader',
+          options: {
+            formatter: require('eslint-friendly-formatter')
+          }
+        },
+        exclude: /node_modules/,
+        include: /src/
+      },
+      {
+        test: /\.jsx?$/,
         use: ['babel-loader'],
         exclude: /node_modules/
       },
