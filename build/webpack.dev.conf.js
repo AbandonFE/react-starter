@@ -11,7 +11,7 @@ Object.keys(baseConfig.entry).forEach(name => {
   baseConfig.entry[name] = baseConfig.entry[name].concat('webpack-hot-middleware/client?reload=true');
 });
 
-module.exports = merge(baseConfig, {
+const extraConfig = {
   module: {
     rules: [
       {
@@ -41,4 +41,22 @@ module.exports = merge(baseConfig, {
     // 友好的错误提示
     new friendlyErrorsPlugin()
   ]
-})
+}
+
+// 是否开启 eslint
+if (config.dev.eslint) {
+  extraConfig.module.rules.unshift({
+    test: /\.jsx?$/,
+    enforce: 'pre',
+    use: {
+      loader: 'eslint-loader',
+      options: {
+        formatter: require('eslint-friendly-formatter')
+      }
+    },
+    exclude: /node_modules/,
+    include: /src/
+  })
+}
+
+module.exports = merge(baseConfig, extraConfig)
